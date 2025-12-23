@@ -823,8 +823,8 @@ def main():
     parser = argparse.ArgumentParser(description='Classify lease clauses from PDF files in a folder')
     parser.add_argument('input_folder', type=str,
                         help='Path to folder containing PDF files (required)')
-    parser.add_argument('--config', type=str, default='config.json',
-                        help='Path to config file (default: config.json)')
+    parser.add_argument('--config', type=str, default='config.ini',
+                        help='Path to config file (default: config.ini)')
     parser.add_argument('--output', type=str, default=None,
                         help='Output folder for JSON files (default: prints to console)')
     parser.add_argument('--no-fields', action='store_true',
@@ -909,13 +909,16 @@ def main():
         # Regular OpenAI
         openai_api_key = os.environ.get('OPENAI_API_KEY') or config["openai"].get("api_key", "")
 
-    # Check if Azure OpenAI is available for field extraction
-    azure_available = True
+    # Check if OpenAI is available for field extraction
+    openai_available = True
     if provider == 'azure' and not azure_endpoint:
-        azure_available = False
+        openai_available = False
         print("Warning: Azure OpenAI endpoint not configured. Field extraction will be disabled.", file=sys.stderr)
+    elif provider == 'openai' and not openai_api_key:
+        openai_available = False
+        print("Warning: OpenAI API key not configured. Field extraction will be disabled.", file=sys.stderr)
 
-    extract_fields = not args.no_fields and openai_api_key and azure_available
+    extract_fields = not args.no_fields and openai_api_key and openai_available
 
     # Create OpenAI client if field extraction is enabled
     openai_client = None
@@ -943,8 +946,8 @@ def main():
             print("Field extraction disabled (--no-fields flag)")
         elif not openai_api_key:
             print("Field extraction disabled (no API key configured)")
-        elif not azure_available:
-            print("Field extraction disabled (Azure endpoint not configured)")
+        elif not openai_available:
+            print("Field extraction disabled (OpenAI/Azure endpoint not configured)")
 
     # Load reverse mapping (name -> ID)
     mapping_path = Path(mapping_file)

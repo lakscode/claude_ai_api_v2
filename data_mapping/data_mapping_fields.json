@@ -1,0 +1,1242 @@
+[
+  {
+    "_id": {
+      "$oid": "5d51128d18b40d3e38ed4357"
+    },
+    "name": "Effective Date"
+  },
+  {
+    "_id": {
+      "$oid": "5d9c202e2cf8b955c880360c"
+    },
+    "name": "Term Start Date",
+    "priority":"high"
+  },
+  {
+    "_id": {
+      "$oid": "5d9c202e2cf8b955c880360d"
+    },
+    "name": "Term End Date",
+    "priority":"high"
+  },
+  {
+    "_id": {
+      "$oid": "64217b1a275caef553ece403"
+    },
+    "name": "Tenant Name",
+    "priority":"high"
+  },
+  {
+    "_id": {
+      "$oid": "64217b1a275caef553ece404"
+    },
+    "name": "Landlord Name",
+    "priority":"high"
+  },
+  {
+    "_id": {
+      "$oid": "6423e1b7feb958238303006d"
+    },
+    "name": "Tenant Address",
+    "priority":"high"
+  },
+  {
+    "_id": {
+      "$oid": "6423e1b7feb958238303006e"
+    },
+    "name": "Landlord Address",
+    "priority":"high"
+  },
+  {
+    "_id": {
+      "$oid": "6423e1b7feb958238303006f"
+    },
+    "name": "Property Address",
+    "priority":"high"
+  },
+  {
+    "_id": {
+      "$oid": "64217b1a275caef553ece407"
+    },
+    "name": "Rentable Surface Area",
+    "priority":"high"
+  },
+  {
+    "_id": {
+      "$oid": "6425334927f4a8b79b2535cc"
+    },
+    "name": "Signed Date"
+  },
+  {
+    "_id": {
+      "$oid": "642bae9f5b791f7fb3abfdf1"
+    },
+    "name": "Monthly Rent Amount",
+    "priority":"high"
+  },
+  {
+    "_id": {
+      "$oid": "643e3c752eb7d3874fdb3ace"
+    },
+    "name": "Security Deposit Amount",
+    "priority":"high"
+  },
+  {
+    "_id": {
+      "$oid": "643e3c752eb7d3874fdb3acf"
+    },
+    "name": "Liability Insurance Amount",
+    "priority":"high"
+  },
+  {
+    "_id": {
+      "$oid": "64763c3663e6e0e6539dd147"
+    },
+    "name": "Possession Date",
+    "priority":"high"
+  },
+  {
+    "_id": {
+      "$oid": "64770dfeba739eda8c68d125"
+    },
+    "name": "Lease Duration",
+    "priority":"high"
+  },
+  {
+    "_id": {
+      "$oid": "647988e74eb09eacf08e67c3"
+    },
+    "name": "Common Area Maintenance Charge"
+  },
+  {
+    "_id": {
+      "$oid": "647988e74eb09eacf08e67c4"
+    },
+    "name": "Real Estate Taxes: Pro-rata Share"
+  },
+  {
+    "_id": {
+      "$oid": "64817db63aa703e45876c6fb"
+    },
+    "name": "Currency"
+  },
+
+  {
+    "_id": {
+      "$oid": "6489724b10765c47355ed8bb"
+    },
+    "name": "Late Charge Percent"
+  },
+  {
+    "_id": {
+      "$oid": "64a69a9e4ffb63175c1295b9"
+    },
+    "name": "Tax Amount"
+  },
+  {
+    "_id": {
+      "$oid": "64feabafb9c3186171cbaae2"
+    },
+    "name": "Parking Space Availability"
+  },
+  {
+    "_id": {
+      "$oid": "655db4447cdc543cefa6d76d"
+    },
+    "name": "Lease Commencement Date",
+    "priority":"high"
+  },
+  {
+    "_id": {
+      "$oid": "655daaed8dd334fdbf9540e6"
+    },
+    "name": "Rent Commencement Date",
+    "priority":"high"
+  },
+
+  {
+    "_id": {
+      "$oid": "65bb44f70922531c61a11e39"
+    },
+    "name": "Price/Sq.ft",
+    "priority":"high"
+  },
+  {
+    "_id": {
+      "$oid": "65bb450de57dd7fd14e5a0b8"
+    },
+    "name": "Annual Rent Amount",
+    "priority":"high"
+  },
+  {
+    "_id": {
+      "$oid": "65bb45262d6413bc58d9907c"
+    },
+    "name": "Rent Increase Date"
+  },
+  {
+    "_id": {
+      "$oid": "65d5aa18aa6b66ce535db44c"
+    },
+    "name": "Lease Type"
+  },
+  {
+    "_id": {
+      "$oid": "66168032850461a7537a6624"
+    },
+    "name": "Base Year"
+  },
+  {
+    "_id": {
+      "$oid": "66168032850461a7537a6625"
+    },
+    "name": "Tenant Improvement Allowance"
+  },
+  {
+    "_id": {
+      "$oid": "66168032850461a7537a6626"
+    },
+    "name": "Construction Allowance"
+  },
+  {
+    "_id": {
+      "$oid": "66168032850461a7537a6627"
+    },
+    "name": "Refurbish Allowance"
+  },
+  {
+    "_id": {
+      "$oid": "66168032850461a7537a6628"
+    },
+    "name": "Refresh Allowance"
+  },
+  {
+    "_id": {
+      "$oid": "66168032850461a7537a6629"
+    },
+    "name": "Unused Allowance"
+  },
+  {
+    "_id": {
+      "$oid": "66168032850461a7537a662a"
+    },
+    "name": "Moving Allowance"
+  },
+  {
+    "_id": {
+      "$oid": "6616874eb213bc64cd878d85"
+    },
+    "name": "Allowance Expiration"
+  },
+  {
+    "_id": {
+      "$oid": "66289a8fcbe9fa1e3bcc6802"
+    },
+    "name": "Leased Property Type"
+  },
+  {
+    "_id": {
+      "$oid": "6628d0ead6f178b41eac1aa8"
+    },
+    "name": "Property Name"
+  },
+  {
+    "_id": {
+      "$oid": "66445f64968392d96fe58a88"
+    },
+    "name": "Consent Required from LL"
+  },
+  {
+    "_id": {
+      "$oid": "66445f64968392d96fe58a89"
+    },
+    "name": "No consent Required Amount"
+  },
+  {
+    "_id": {
+      "$oid": "66448cfaeb750a75ce3846d4"
+    },
+    "name": "Estoppel Certificate Delivery Period"
+  },
+  {
+    "_id": {
+      "$oid": "664b01574cf531cc9904ea70"
+    },
+    "name": "Timeframe/Deadline"
+  },
+  {
+    "_id": {
+      "$oid": "664b01574cf531cc9904ea71"
+    },
+    "name": "CPA Required"
+  },
+  {
+    "_id": {
+      "$oid": "664b01574cf531cc9904ea72"
+    },
+    "name": "Contingency Restriction"
+  },
+  {
+    "_id": {
+      "$oid": "664b01574cf531cc9904ea73"
+    },
+    "name": "Multi-Year Review"
+  },
+  {
+    "_id": {
+      "$oid": "664b01574cf531cc9904ea74"
+    },
+    "name": "TT pays"
+  },
+  {
+    "_id": {
+      "$oid": "664b06ad68ed966fd2578d27"
+    },
+    "name": "Hold Over Rent Terms"
+  },
+  {
+    "_id": {
+      "$oid": "664b06ae68ed966fd2578d28"
+    },
+    "name": "Hold Over Tenancy Type"
+  },
+  {
+    "_id": {
+      "$oid": "664b06af68ed966fd2578d29"
+    },
+    "name": "Days to terminate"
+  },
+  {
+    "_id": {
+      "$oid": "664b06b068ed966fd2578d2a"
+    },
+    "name": "Can TT holdover w/ LL Consent"
+  },
+  {
+    "_id": {
+      "$oid": "664b0cf735af869a24263687"
+    },
+    "name": "Caps"
+  },
+  {
+    "_id": {
+      "$oid": "664b0cf835af869a24263688"
+    },
+    "name": "Landlord Reconciliation Due"
+  },
+  {
+    "_id": {
+      "$oid": "664b0cf935af869a24263689"
+    },
+    "name": "Unusual Exclusions"
+  },
+  {
+    "_id": {
+      "$oid": "664b0cfa35af869a2426368a"
+    },
+    "name": "Net Description"
+  },
+  {
+    "_id": {
+      "$oid": "664b0cfb35af869a2426368b"
+    },
+    "name": "Operating Expenses - Base Year"
+  },
+  {
+    "_id": {
+      "$oid": "664c6197d47806cf187c694a"
+    },
+    "name": "SubLease Consent Required"
+  },
+  {
+    "_id": {
+      "$oid": "664c6199d47806cf187c694b"
+    },
+    "name": "Consent Required for Affiliate/Subsidiary"
+  },
+  {
+    "_id": {
+      "$oid": "664c619bd47806cf187c694c"
+    },
+    "name": "Transfer of Ownership is Assignment"
+  }, 
+  {
+    "_id": {
+      "$oid": "664c619fd47806cf187c694e"
+    },
+    "name": "TT to Remain Liable"
+  },
+  {
+    "_id": {
+      "$oid": "664c61a1d47806cf187c694f"
+    },
+    "name": "Profit Share"
+  },
+  {
+    "_id": {
+      "$oid": "664eedf0c5149233b721b4bf"
+    },
+    "name": "Pro Rata Share"
+  },
+  {
+    "_id": {
+      "$oid": "664eedf4c5149233b721b4c1"
+    },
+    "name": "Operating Expenses - Gross UP"
+  },
+  {
+    "_id": {
+      "$oid": "66556a97fe8c013fc16aa541"
+    },
+    "name": "General Liability"
+  },
+  {
+    "_id": {
+      "$oid": "66556ac2b9f59a38b7c1dce5"
+    },
+    "name": "Property/Fire and EC Insurance"
+  },
+  {
+    "_id": {
+      "$oid": "66556ae4967ebc868a0df486"
+    },
+    "name": "Workers Compensation"
+  },
+  {
+    "_id": {
+      "$oid": "66556aff6b8660a6182f6ffb"
+    },
+    "name": "Business Auto Liability"
+  },
+  {
+    "_id": {
+      "$oid": "66556d16af466780098113db"
+    },
+    "name": "Employer's Liability"
+  },
+  {
+    "_id": {
+      "$oid": "66556f0651a9c9e844031d19"
+    },
+    "name": "Business Interruption"
+  },
+  {
+    "_id": {
+      "$oid": "66556f0b51a9c9e844031d1a"
+    },
+    "name": "Written Notice of Policy Cancellation/Change"
+  },
+  {
+    "_id": {
+      "$oid": "66556f87ebd55a3e8c9132eb"
+    },
+    "name": "Additional Insured"
+  },
+  {
+    "_id": {
+      "$oid": "6656b6a9420a65858f8cd320"
+    },
+    "name": "Allowance Amount"
+  },
+  {
+    "_id": {
+      "$oid": "6656b6b91ded0c88fa36d39a"
+    },
+    "name": "Types of Expenses it can be used for"
+  },
+  {
+    "_id": {
+      "$oid": "6656b6ca2a0cea14585804c1"
+    },
+    "name": "Requirements for Reimbursement"
+  },
+  {
+    "_id": {
+      "$oid": "6656b6e309f3d5d1ddb74ddf"
+    },
+    "name": "Can unused funds be applied to rent"
+  },
+  {
+    "_id": {
+      "$oid": "6656c10dfbcdc114e0b6fdf7"
+    },
+    "name": "Deadlines"
+  },
+  {
+    "_id": {
+      "$oid": "6656c3a87214a9f376a88267"
+    },
+    "name": "Included in Operating"
+  },
+  {
+    "_id": {
+      "$oid": "6656c466c38cef813bdc478e"
+    },
+    "name": "Tax: Base Year"
+  },
+  {
+    "_id": {
+      "$oid": "6656c7b1d8b9bc1eb09c7576"
+    },
+    "name": "Monthly Estimate/Lump Sum"
+  },
+  {
+    "_id": {
+      "$oid": "6656c8ed9a18d0bae117d28a"
+    },
+    "name": "Frequency Date"
+  },
+  {
+    "_id": {
+      "$oid": "6656c92dbc927e45045cd1b6"
+    },
+    "name": "Date Taxes Due"
+  },
+  {
+    "_id": {
+      "$oid": "6656c976dfe8c26f63177211"
+    },
+    "name": "Paid to Taxing Authority"
+  },
+  {
+    "_id": {
+      "$oid": "6656c9c249dada336d2653af"
+    },
+    "name": "Lot & Parcel Number"
+  },
+  {
+    "_id": {
+      "$oid": "66583b95240d7d21a8c9660f"
+    },
+    "name": "Requirements"
+  },
+  {
+    "_id": {
+      "$oid": "665ec7e4c3253e5c975ac1b5"
+    },
+    "name": "Country Code"
+  },
+  {
+    "_id": {
+      "$oid": "6678ff08a9aefb6552287dad"
+    },
+    "name": "Store Operation Hours"
+  },
+  {
+    "_id": {
+      "$oid": "6684f6f7f06700665fb6a001"
+    },
+    "name": "Tenant Notice Address"
+  },
+  {
+    "_id": {
+      "$oid": "6684f6fcf06700665fb6a002"
+    },
+    "name": "Landlord Notice Address"
+  },
+  {
+    "_id": {
+      "$oid": "6687818d70da58bb41b5c435"
+    },
+    "name": "Landlord Email"
+  },
+  {
+    "_id": {
+      "$oid": "668781d070da58bb41b5c436"
+    },
+    "name": "Tenant Email"
+  },
+
+  {
+    "_id": {
+      "$oid": "66a9d851671b8975c60284df"
+    },
+    "name": "Rent Schedule"
+  },
+  {
+    "_id": {
+      "$oid": "66b06ba838264fa814e222d9"
+    },
+    "name": "Time frame for Transfer Notice"
+  },
+  {
+    "_id": {
+      "$oid": "66b06bb738264fa814e222da"
+    },
+    "name": "Recapture Right"
+  },
+  {
+    "_id": {
+      "$oid": "66b06bc938264fa814e222db"
+    },
+    "name": "Assignment Fee"
+  },
+  {
+    "_id": {
+      "$oid": "66b06bda38264fa814e222dc"
+    },
+    "name": "Affiliated Transfer"
+  },
+  {
+    "_id": {
+      "$oid": "66b30e1cbe0318a12ac3244f"
+    },
+    "name": "Insurance Coverage Details"
+  },
+  {
+    "_id": {
+      "$oid": "66b9cdd218b23e191b425950"
+    },
+    "name": "Renewal Options"
+  },
+  {
+    "_id": {
+      "$oid": "66e13143d186710290ce9066"
+    },
+    "name": "Suite Number"
+  },
+  {
+    "_id": {
+      "$oid": "66e7b27738573d6b9653ff89"
+    },
+    "name": "Store ID"
+  },
+  {
+    "_id": {
+      "$oid": "66f2850258fe0c738bd9264b"
+    },
+    "name": "Total Land Area"
+  },
+  {
+    "_id": {
+      "$oid": "66f2c68858fe0c738bd9265a"
+    },
+    "name": "Ownership Type"
+  },
+  {
+    "_id": {
+      "$oid": "66f2c6f558fe0c738bd9265b"
+    },
+    "name": "Geographic Region"
+  },
+  {
+    "_id": {
+      "$oid": "66f28c8cb7cd2b2bd4f2ff52"
+    },
+    "name": "Termination Options"
+  },
+  {
+    "_id": {
+      "$oid": "66f28ccdb7cd2b2bd4f2ff53"
+    },
+    "name": "Expansion Options"
+  },
+  {
+    "_id": {
+      "$oid": "66ff8eb038089ce551a17952"
+    },
+    "name": "Unit of Measure"
+  },
+  {
+    "_id": {
+      "$oid": "66ff99a938089ce551a17953"
+    },
+    "name": "Tenant Phone Number"
+  },
+  {
+    "_id": {
+      "$oid": "66ff99c838089ce551a17954"
+    },
+    "name": "Landlord Phone Number"
+  },
+  {
+    "_id": {
+      "$oid": "66fff11838060eefad6c5d1e"
+    },
+    "name": "Purchase Options"
+  },
+  {
+    "_id": {
+      "$oid": "66fff12538060eefad6c5d1f"
+    },
+    "name": "Relocation Options"
+  },
+  {
+    "_id": {
+      "$oid": "66fff13738060eefad6c5d20"
+    },
+    "name": "ROFO/ROFR Options"
+  },
+  {
+    "_id": {
+      "$oid": "66fff14238060eefad6c5d21"
+    },
+    "name": "Downsize Options"
+  },
+  {
+    "_id": {
+      "$oid": "6710f41858920c129b4a723d"
+    },
+    "name": "One Time Fee"
+  },
+  {
+    "_id": {
+      "$oid": "6715f9a558920c129b4a7270"
+    },
+    "name": "Total Building Area"
+  },
+  {
+    "_id": {
+      "$oid": "6716023c58920c129b4a727d"
+    },
+    "name": "Free Rent Period"
+  },
+  {
+    "_id": {
+      "$oid": "6731bc89e6b00e81a6772222"
+    },
+    "name": "Notice Copy to Address - Tenant"
+  },
+  {
+    "_id": {
+      "$oid": "673232e6e6b00e81a677223f"
+    },
+    "name": "Landlord Notice Copy to Address"
+  },
+  {
+    "_id": {
+      "$oid": "674418afa7e6efbc275ade7b"
+    },
+    "name": "Renewal Periods"
+  },
+  {
+    "_id": {
+      "$oid": "67875739edb5b694d41d0675"
+    },
+    "name": "Total Seats"
+  },
+  {
+    "_id": {
+      "$oid": "6787579bedb5b694d41d0676"
+    },
+    "name": "Price Per Seat"
+  },
+  {
+    "_id": {
+      "$oid": "678757a4edb5b694d41d0677"
+    },
+    "name": "Vat %"
+  },
+  {
+    "_id": {
+      "$oid": "678757adedb5b694d41d0678"
+    },
+    "name": "Vat included in Price"
+  },
+  {
+    "_id": {
+      "$oid": "67e4d6443796c6f7cca1bfb4"
+    },
+    "name": "Early Termination Options"
+  },
+
+  {
+    "_id": {
+      "$oid": "682ae37df098740272f11c72"
+    },
+    "name": "Percentage Rent Rate"
+  },
+  
+  {
+    "_id": {
+      "$oid": "68bfe54586f264baffa51888"
+    },
+    "name": "Clear Height"
+  },
+  {
+    "_id": {
+      "$oid": "68bfe58586f264baffa51889"
+    },
+    "name": "Power Capacity"
+  },
+  {
+    "_id": {
+      "$oid": "68bfe5ab86f264baffa5188a"
+    },
+    "name": "Floor Load Capacity"
+  },
+  {
+    "_id": {
+      "$oid": "68c15f9a0a9fcc90b52cf87a"
+    },
+    "name": "Rights Types"
+  },
+  {
+    "_id": {
+      "$oid": "68c15fcf0a9fcc90b52cf87b"
+    },
+    "name": "Approval Required"
+  },
+  {
+    "_id": {
+      "$oid": "68c15ff80a9fcc90b52cf87c"
+    },
+    "name": "Design Standards Refs"
+  },
+  {
+    "_id": {
+      "$oid": "68c169890a9fcc90b52cf880"
+    },
+    "name": "Removal Restoration Terms"
+  },
+  {
+    "_id": {
+      "$oid": "68c16f620a9fcc90b52cf881"
+    },
+    "name": "Responsibility Matrix"
+  },
+  {
+    "_id": {
+      "$oid": "68c16f620a9fcc90b52cf882"
+    },
+    "name": "Cap Thresholds"
+  },
+  {
+    "_id": {
+      "$oid": "68c16f620a9fcc90b52cf883"
+    },
+    "name": "Emergency Repairs"
+  },
+  {
+    "_id": {
+      "$oid": "68c16f620a9fcc90b52cf884"
+    },
+    "name": "Maintenance Responsibility"
+  },
+  {
+    "_id": {
+      "$oid": "68c16f620a9fcc90b52cf885"
+    },
+    "name": "Replacement Responsibility"
+  },
+  {
+    "_id": {
+      "$oid": "68c16f620a9fcc90b52cf886"
+    },
+    "name": "Preventive Maintenance Required"
+  },
+  {
+    "_id": {
+      "$oid": "68c16f620a9fcc90b52cf887"
+    },
+    "name": "Trailer/Reserved Stalls"
+  },
+  {
+    "_id": {
+      "$oid": "68c16f620a9fcc90b52cf888"
+    },
+    "name": "Overnight Rights"
+  },
+  {
+    "_id": {
+      "$oid": "68c16f620a9fcc90b52cf889"
+    },
+    "name": "Relocation Rights"
+  },
+  {
+    "_id": {
+      "$oid": "68c185980a9fcc90b52cf889"
+    },
+    "name": "Roof - Replacement Responsibility"
+  },
+  {
+    "_id": {
+      "$oid": "68c185a70a9fcc90b52cf88a"
+    },
+    "name": "Penetration Policy"
+  },
+  {
+    "_id": {
+      "$oid": "68c185b10a9fcc90b52cf88b"
+    },
+    "name": "Leak Response SLA"
+  },
+  {
+    "_id": {
+      "$oid": "68c1877e0a9fcc90b52cf88c"
+    },
+    "name": "Metering Type"
+  },
+  {
+    "_id": {
+      "$oid": "68c187aa0a9fcc90b52cf88d"
+    },
+    "name": "Payor"
+  },
+  {
+    "_id": {
+      "$oid": "68c187aa0a9fcc90b52cf88e"
+    },
+    "name": "Energy Reporting"
+  },
+  {
+    "_id": {
+      "$oid": "68c18edf0a9fcc90b52cf893"
+    },
+    "name": "Excess Costs"
+  },
+  {
+    "_id": {
+      "$oid": "68c18edf0a9fcc90b52cf894"
+    },
+    "name": "Unused Allowance"
+  },
+  {
+    "_id": {
+      "$oid": "68ca3ccf05dd52147b76dabf"
+    },
+    "name": "Controllable Cap Percent"
+  },
+  {
+    "_id": {
+      "$oid": "68ca3d4f05dd52147b76dac0"
+    },
+    "name": "Exclusions List"
+  },
+  {
+    "_id": {
+      "$oid": "68ca3d9605dd52147b76dac1"
+    },
+    "name": "Gross-Up Percent"
+  },
+  {
+    "_id": {
+      "$oid": "68ca3efe05dd52147b76dac2"
+    },
+    "name": "Audit Window Days"
+  },
+  {
+    "_id": {
+      "$oid": "68caa001342a5bbaf5ede934"
+    },
+    "name": "Capital vs. Expense Definition"
+  },
+  {
+    "_id": {
+      "$oid": "68caa324342a5bbaf5ede935"
+    },
+    "name": "Amortization Method/Period"
+  },
+  {
+    "_id": {
+      "$oid": "68caa342342a5bbaf5ede936"
+    },
+    "name": "Pass-Through Rules"
+  },
+  {
+    "_id": {
+      "$oid": "68caa19205dd52147b76dadd"
+    },
+    "name": "Sub-Metering & Reporting"
+  },
+  {
+    "_id": {
+      "$oid": "68caa2b605dd52147b76dade"
+    },
+    "name": "Solar Provisions"
+  },
+  {
+    "_id": {
+      "$oid": "68caa31005dd52147b76dadf"
+    },
+    "name": "Waste Streams"
+  },
+  {
+    "_id": {
+      "$oid": "68cab78c05dd52147b76dae2"
+    },
+    "name": "Hazardous Materials Definition"
+  },
+  {
+    "_id": {
+      "$oid": "68cab9da05dd52147b76dae3"
+    },
+    "name": "Indemnities"
+  },
+  {
+    "_id": {
+      "$oid": "68caba0d05dd52147b76dae4"
+    },
+    "name": "Remediation Standards"
+  },
+  {
+    "_id": {
+      "$oid": "68cabe2e05dd52147b76dae5"
+    },
+    "name": "Form (Cash/LC)"
+  },
+  {
+    "_id": {
+      "$oid": "68cabe6305dd52147b76dae6"
+    },
+    "name": "Reduction Schedule"
+  },
+  {
+    "_id": {
+      "$oid": "68cbe91305dd52147b76dae9"
+    },
+    "name": "Appeal Rights"
+  },
+  {
+    "_id": {
+      "$oid": "68cbe97b05dd52147b76daeb"
+    },
+    "name": "Special Assessments"
+  },
+  {
+    "_id": {
+      "$oid": "68cd2f3805dd52147b76daf6"
+    },
+    "name": "Restoration Obligation"
+  },
+  {
+    "_id": {
+      "$oid": "68cd320205dd52147b76daf7"
+    },
+    "name": "Alterations Provisions"
+  },
+  {
+    "_id": {
+      "$oid": "68cd59a57068680a7fa09cb1"
+    },
+    "name": "Service Frequency"
+  },
+  {
+    "_id": {
+      "$oid": "68cd59fd7068680a7fa09cb2"
+    },
+    "name": "After Hours Policy"
+  },
+  {
+    "_id": {
+      "$oid": "68cd5a467068680a7fa09cb3"
+    },
+    "name": "HVAC - Warranty Terms"
+  },
+  {
+    "_id": {
+      "$oid": "68cd5cfd7068680a7fa09cb7"
+    },
+    "name": "Total Stalls"
+  },
+  {
+    "_id": {
+      "$oid": "68cd5d367068680a7fa09cb8"
+    },
+    "name": "Parking Fee Method"
+  },
+  {
+    "_id": {
+      "$oid": "68cd5cac05dd52147b76dafa"
+    },
+    "name": "Roof - Maintenance Responsibility"
+  },
+  {
+    "_id": {
+      "$oid": "68cd5d6905dd52147b76dafb"
+    },
+    "name": "Warranty Years"
+  },
+  {
+    "_id": {
+      "$oid": "68cd5f157068680a7fa09cbf"
+    },
+    "name": "Interruption Abatement"
+  },
+  {
+    "_id": {
+      "$oid": "68cd5f6a7068680a7fa09cc0"
+    },
+    "name": "Generator Rights"
+  },
+  {
+    "_id": {
+      "$oid": "68cd61897068680a7fa09cc3"
+    },
+    "name": "Notice Period Days"
+  },
+  {
+    "_id": {
+      "$oid": "68d1014d90a008134a8cea43"
+    },
+    "name": "Code and Accessibility Compliance"
+  },
+  {
+    "_id": {
+      "$oid": "68d102af90a008134a8cea44"
+    },
+    "name": "Liens Protection"
+  },
+  {
+    "_id": {
+      "$oid": "68d1033b90a008134a8cea45"
+    },
+    "name": "Contractor Requirements"
+  },
+  {
+    "_id": {
+      "$oid": "68d1038290a008134a8cea46"
+    },
+    "name": "Insurance Requirements"
+  },
+  {
+    "_id": {
+      "$oid": "68d11101b4f4b7eaddee1308"
+    },
+    "name": "Change Orders"
+  },
+  {
+    "_id": {
+      "$oid": "68d111d2b4f4b7eaddee1309"
+    },
+    "name": "Overage Rates"
+  },
+  {
+    "_id": {
+      "$oid": "68d1124bb4f4b7eaddee130a"
+    },
+    "name": "Punchlist Process"
+  },
+  {
+    "_id": {
+      "$oid": "68d112afb4f4b7eaddee130b"
+    },
+    "name": "Disbursement Schedule"
+  },
+  {
+    "_id": {
+      "$oid": "68d11307b4f4b7eaddee130c"
+    },
+    "name": "Acceptance Conditions"
+  },
+  {
+    "_id": {
+      "$oid": "68d11352b4f4b7eaddee130d"
+    },
+    "name": "Warranty Terms"
+  },
+  {
+    "_id": {
+      "$oid": "68d118deb4f4b7eaddee130e"
+    },
+    "name": "Green Lease Obligations"
+  },
+  {
+    "_id": {
+      "$oid": "68d119a7b4f4b7eaddee130f"
+    },
+    "name": "LEED/LED Commitments"
+  },
+  {
+    "_id": {
+      "$oid": "68d11ba3b4f4b7eaddee1310"
+    },
+    "name": "Spill Response"
+  },
+  {
+    "_id": {
+      "$oid": "68d11c29b4f4b7eaddee1311"
+    },
+    "name": "Audits Access"
+  },
+  {
+    "_id": {
+      "$oid": "68d11e37b4f4b7eaddee1312"
+    },
+    "name": "Coverage Types and Limits"
+  },
+  {
+    "_id": {
+      "$oid": "68d11ed9b4f4b7eaddee1313"
+    },
+    "name": "Waiver of Subrogation"
+  },
+  {
+    "_id": {
+      "$oid": "68d11f55b4f4b7eaddee1314"
+    },
+    "name": "Certificates"
+  },
+  {
+    "_id": {
+      "$oid": "68d11fbfb4f4b7eaddee1315"
+    },
+    "name": "Deductibles"
+  },
+  {
+    "_id": {
+      "$oid": "68d122a9b4f4b7eaddee1316"
+    },
+    "name": "Controllable vs Non-Controllable"
+  },
+  {
+    "_id": {
+      "$oid": "68d1238cb4f4b7eaddee1317"
+    },
+    "name": "Audit Rights"
+  },
+  {
+    "_id": {
+      "$oid": "68d1252eb4f4b7eaddee1318"
+    },
+    "name": "Draw and Cure"
+  },
+  {
+    "_id": {
+      "$oid": "68d1276ab4f4b7eaddee1319"
+    },
+    "name": "Replacement Mechanics"
+  },
+  {
+    "_id": {
+      "$oid": "68d12973b4f4b7eaddee131a"
+    },
+    "name": "Base Year vs Net"
+  },
+  {
+    "_id": {
+      "$oid": "68d12a13b4f4b7eaddee131b"
+    },
+    "name": "Exclusions"
+  },
+  {
+    "_id": {
+      "$oid": "68d12a4db4f4b7eaddee131c"
+    },
+    "name": "Caps"
+  },
+  {
+    "_id": {
+      "$oid": "6900468810582c53bbbd1d49"
+    },
+    "name": "Prevailing Rate"
+  },
+  {
+    "_id": {
+      "$oid": "692fd37c6fa7a14c781792a5"
+    },
+    "name": "Percentage Rent Amount"
+  },
+  {
+    "_id": {
+      "$oid": "692fdb896fa7a14c781792b9"
+    },
+    "name": "Move In Date"
+  },
+  {
+    "_id": {
+      "$oid": "692fdbca6fa7a14c781792ba"
+    },
+    "name": "Management Fee"
+  }
+]

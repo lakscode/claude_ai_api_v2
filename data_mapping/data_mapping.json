@@ -1,0 +1,756 @@
+[{
+  "_id": {
+    "$oid": "5d51128d18b40d3e38ed4353"
+  },
+  "name": "Contract Title"
+},
+{
+  "_id": {
+    "$oid": "5d51128d18b40d3e38ed435f"
+  },
+  "name": "Indemnification"
+},
+{
+  "_id": {
+    "$oid": "5d51128d18b40d3e38ed435b"
+  },
+  "name": "Warranties"
+},
+{
+  "_id": {
+    "$oid": "5d51128d18b40d3e38ed4360"
+  },
+  "name": "Limitation of Liability"
+},
+{
+  "_id": {
+    "$oid": "5d51128d18b40d3e38ed4367"
+  },
+  "name": "Assignment"
+},
+{
+  "_id": {
+    "$oid": "5d51128d18b40d3e38ed435c"
+  },
+  "name": "Confidential Information"
+},
+{
+  "_id": {
+    "$oid": "5d51128d18b40d3e38ed4363"
+  },
+  "name": "Entire Agreement"
+},
+{
+  "_id": {
+    "$oid": "5d51128d18b40d3e38ed4358"
+  },
+  "name": "Term"
+},
+{
+  "_id": {
+    "$oid": "5d51128d18b40d3e38ed4359"
+  },
+  "name": "Termination"
+},
+{
+  "_id": {
+    "$oid": "634657eae07375a8a0ea2343"
+  },
+  "name": "Non Assignment"
+},
+{
+  "_id": {
+    "$oid": "634657eae07375a8a0ea2342"
+  },
+  "name": "Termination for Convenience"
+},
+{
+  "_id": {
+    "$oid": "63454d11f19d4f84cc67ab2e"
+  },
+  "name": "Change of Control"
+},
+{
+  "_id": {
+    "$oid": "63454d11f19d4f84cc67ab2f"
+  },
+  "name": "Anti-assignment"
+},
+{
+  "_id": {
+    "$oid": "5d51128d18b40d3e38ed4369"
+  },
+  "name": "Insurance"
+},
+{
+  "_id": {
+    "$oid": "634657eae07375a8a0ea2344"
+  },
+  "name": "Arbitration"
+},
+{
+  "_id": {
+    "$oid": "634657eae07375a8a0ea2345"
+  },
+  "name": "Events of Default"
+},
+{
+  "_id": {
+    "$oid": "634657eae07375a8a0ea2346"
+  },
+  "name": "Remedy"
+},
+{
+  "_id": {
+    "$oid": "5d51128d18b40d3e38ed4354"
+  },
+  "name": "Agreement Description"
+},
+{
+  "_id": {
+    "$oid": "5db6dbd2831b39fa76d7fd86"
+  },
+  "name": "First Party Obligation"
+},
+{
+  "_id": {
+    "$oid": "5db6dbd2831b39fa76d7fd87"
+  },
+  "name": "Second Party Obligation"
+},
+{
+  "_id": {
+    "$oid": "5db6dbd2831b39fa76d7fd88"
+  },
+  "name": "Mutual Obligation"
+},
+{
+  "_id": {
+    "$oid": "5d51128d18b40d3e38ed436c"
+  },
+  "name": "Termination by Breach"
+},
+{
+  "_id": {
+    "$oid": "5d51128d18b40d3e38ed436d"
+  },
+  "name": "Termination by Force Majeure"
+},
+{
+  "_id": {
+    "$oid": "5d51128d18b40d3e38ed435a"
+  },
+  "name": "Audits"
+},
+{
+  "_id": {
+    "$oid": "5d51128d18b40d3e38ed435d"
+  },
+  "name": "Data Protection"
+},
+{
+  "_id": {
+    "$oid": "5d51128d18b40d3e38ed435e"
+  },
+  "name": "Intellectual Property"
+},
+{
+  "_id": {
+    "$oid": "5d51128d18b40d3e38ed4361"
+  },
+  "name": "Notices"
+},
+{
+  "_id": {
+    "$oid": "5d51128d18b40d3e38ed4362"
+  },
+  "name": "Non Solicitation"
+},
+{
+  "_id": {
+    "$oid": "5d51128d18b40d3e38ed4364"
+  },
+  "name": "Force Majeure"
+},
+{
+  "_id": {
+    "$oid": "5d51128d18b40d3e38ed4365"
+  },
+  "name": "No Publicity"
+},
+{
+  "_id": {
+    "$oid": "5d51128d18b40d3e38ed4366"
+  },
+  "name": "Governing Law"
+},
+{
+  "_id": {
+    "$oid": "5d51128d18b40d3e38ed4368"
+  },
+  "name": "Survival"
+},
+{
+  "_id": {
+    "$oid": "5d51128d18b40d3e38ed436b"
+  },
+  "name": "Payments"
+},
+{
+  "_id": {
+    "$oid": "5d51128d18b40d3e38ed436a"
+  },
+  "name": "Cumulative Remedies"
+},
+{
+  "_id": {
+    "$oid": "5d6363a596f2e15feec4a2a7"
+  },
+  "name": "License Grant"
+},
+{
+  "_id": {
+    "$oid": "5d6363a596f2e15feec4a2aa"
+  },
+  "name": "Data Ownership"
+},
+{
+  "_id": {
+    "$oid": "5d876e970e9a46ad8d7b0304"
+  },
+  "name": "Dispute Resolution"
+},
+{
+  "_id": {
+    "$oid": "5d876e970e9a46ad8d7b0305"
+  },
+  "name": "Severability"
+},
+{
+  "_id": {
+    "$oid": "5d9c202e2cf8b955c8803610"
+  },
+  "name": "Counter Part of the Agreement"
+},
+{
+  "_id": {
+    "$oid": "63d79f6b1c136b5d19411608"
+  },
+  "name": "Delivery"
+},
+{
+  "_id": {
+    "$oid": "63f37d2c0d2f74adc82f4101"
+  },
+  "name": "Rent"
+},
+{
+  "_id": {
+    "$oid": "63f37e3b09cac815d5b1b118"
+  },
+  "name": "Rent Information"
+},
+{
+  "_id": {
+    "$oid": "63f37d2c0d2f74adc82f4102"
+  },
+  "name": "Late Charge"
+},
+{
+  "_id": {
+    "$oid": "63f37d2c0d2f74adc82f4103"
+  },
+  "name": "Assignment and Subleasing"
+},
+{
+  "_id": {
+    "$oid": "63f37d2c0d2f74adc82f4104"
+  },
+  "name": "Security Deposit"
+},
+{
+  "_id": {
+    "$oid": "63f37d2c0d2f74adc82f4105"
+  },
+  "name": "Subordination"
+},
+{
+  "_id": {
+    "$oid": "63f37d2c0d2f74adc82f4106"
+  },
+  "name": "Hold Over"
+},
+{
+  "_id": {
+    "$oid": "63f37d2c0d2f74adc82f4107"
+  },
+  "name": "Renewal"
+},
+{
+  "_id": {
+    "$oid": "5d876e970e9a46ad8d7b0307"
+  },
+  "name": "Taxes"
+},
+{
+  "_id": {
+    "$oid": "64217b1a275caef553ece405"
+  },
+  "name": "Leased Premises"
+},
+{
+  "_id": {
+    "$oid": "64217b1a275caef553ece406"
+  },
+  "name": "Permitted Uses"
+},
+{
+  "_id": {
+    "$oid": "64217b1a275caef553ece408"
+  },
+  "name": "Parking Requirements"
+},
+{
+  "_id": {
+    "$oid": "64217b1a275caef553ece40a"
+  },
+  "name": "Rental Concessions"
+},
+{
+  "_id": {
+    "$oid": "64217b1a275caef553ece40b"
+  },
+  "name": "Repairs"
+},
+{
+  "_id": {
+    "$oid": "64217b1a275caef553ece40c"
+  },
+  "name": "Operating Expenses"
+},
+{
+  "_id": {
+    "$oid": "64217b1a275caef553ece40d"
+  },
+  "name": "Co-Tenancy"
+},
+{
+  "_id": {
+    "$oid": "64217b1a275caef553ece40e"
+  },
+  "name": "Expansion Rights"
+},
+{
+  "_id": {
+    "$oid": "64217b1a275caef553ece40f"
+  },
+  "name": "Assignability and Exclusivity"
+},
+{
+  "_id": {
+    "$oid": "64217b1a275caef553ece410"
+  },
+  "name": "Estoppel"
+},
+{
+  "_id": {
+    "$oid": "64217b1a275caef553ece411"
+  },
+  "name": "Early Termination"
+},
+{
+  "_id": {
+    "$oid": "63f37d2c0d2f74adc82f4109"
+  },
+  "name": "Alterations"
+},
+{
+  "_id": {
+    "$oid": "6423e1354339dc1e236cd551"
+  },
+  "name": "Go Dark"
+},
+{
+  "_id": {
+    "$oid": "6437b77dc29f8da4d516914e"
+  },
+  "name": "Non Compete"
+},
+{
+  "_id": {
+    "$oid": "635617941fd736b731fb1350"
+  },
+  "name": "Others"
+},
+{
+  "_id": {
+    "$oid": "6486a4b898f51f4d2555f608"
+  },
+  "name": "Signage"
+},
+{
+  "_id": {
+    "$oid": "64afaa38bddca5e7ee24fdf8"
+  },
+  "name": "Value Conclusions"
+},
+{
+  "_id": {
+    "$oid": "64afaa38bddca5e7ee24fe04"
+  },
+  "name": "Sale History"
+},
+{
+  "_id": {
+    "$oid": "64afaa38bddca5e7ee24fe05"
+  },
+  "name": "Market Trends"
+},
+{
+  "_id": {
+    "$oid": "64afaa38bddca5e7ee24fe0a"
+  },
+  "name": "Flood Zone Description"
+},
+{
+  "_id": {
+    "$oid": "64afaa38bddca5e7ee24fe0b"
+  },
+  "name": "Hazardous Substances"
+},
+{
+  "_id": {
+    "$oid": "64afaa38bddca5e7ee24fe0c"
+  },
+  "name": "Physical Deterioration"
+},
+{
+  "_id": {
+    "$oid": "64afaa38bddca5e7ee24fe0d"
+  },
+  "name": "Functional Obsolescence"
+},
+{
+  "_id": {
+    "$oid": "64afaa38bddca5e7ee24fe0e"
+  },
+  "name": "Comparable Sales"
+},
+{
+  "_id": {
+    "$oid": "64afaa38bddca5e7ee24fe0f"
+  },
+  "name": "Renewal Probability"
+},
+{
+  "_id": {
+    "$oid": "64afaa38bddca5e7ee24fe10"
+  },
+  "name": "Downtime"
+},
+{
+  "_id": {
+    "$oid": "64afaa38bddca5e7ee24fe11"
+  },
+  "name": "Free Rent"
+},
+{
+  "_id": {
+    "$oid": "64afaa38bddca5e7ee24fe12"
+  },
+  "name": "Leasing Commissions"
+},
+{
+  "_id": {
+    "$oid": "64afaa38bddca5e7ee24fe13"
+  },
+  "name": "Vacancy and Collection Loss"
+},
+{
+  "_id": {
+    "$oid": "64afaa38bddca5e7ee24fe1a"
+  },
+  "name": "Lease Expiration Exposure"
+},
+{
+  "_id": {
+    "$oid": "65029c689b2f3fa65d3a0a79"
+  },
+  "name": "Common Area Maintenance"
+},
+{
+  "_id": {
+    "$oid": "6503fe5c0d9234077df625f3"
+  },
+  "name": "Possession"
+},
+{
+  "_id": {
+    "$oid": "6503fe5c0d9234077df625f4"
+  },
+  "name": "Data Security"
+},
+{
+  "_id": {
+    "$oid": "6503fe5c0d9234077df625f5"
+  },
+  "name": "Data Privacy"
+},
+{
+  "_id": {
+    "$oid": "653b95e68d8833a361063019"
+  },
+  "name": "Landlord Rights"
+},
+{
+  "_id": {
+    "$oid": "653b95e68d8833a361063018"
+  },
+  "name": "Tenant Rights"
+},
+{
+  "_id": {
+    "$oid": "647988e74eb09eacf08e67c2"
+  },
+  "name": "Options and Rights"
+},
+{
+  "_id": {
+    "$oid": "65a77f233b6f53770a39427d"
+  },
+  "name": "Financial Reporting"
+},
+{
+  "_id": {
+    "$oid": "65a7804386238cdf8675efd5"
+  },
+  "name": "Grant of Security Interest"
+},
+{
+  "_id": {
+    "$oid": "65a7829400df30de9e57e33c"
+  },
+  "name": "Recourse"
+},
+{
+  "_id": {
+    "$oid": "66163264081a1a5f9a884e5f"
+  },
+  "name": "Death & Disability"
+},
+{
+  "_id": {
+    "$oid": "66163264081a1a5f9a884e60"
+  },
+  "name": "Additional Rent"
+},
+{
+  "_id": {
+    "$oid": "66163264081a1a5f9a884e61"
+  },
+  "name": "Gross-up"
+},
+{
+  "_id": {
+    "$oid": "66163264081a1a5f9a884e62"
+  },
+  "name": "Guaranty"
+},
+{
+  "_id": {
+    "$oid": "66163264081a1a5f9a884e63"
+  },
+  "name": "Exclusive Rights"
+},
+{
+  "_id": {
+    "$oid": "66164347be70423f94551f9f"
+  },
+  "name": "Operating Expense Reimbursement"
+},
+{
+  "_id": {
+    "$oid": "66445f64968392d96fe58a8a"
+  },
+  "name": "Structural/Non-Structural Requirements"
+},
+{
+  "_id": {
+    "$oid": "66445f64968392d96fe58a8b"
+  },
+  "name": "Remain Property of LL"
+},
+{
+  "_id": {
+    "$oid": "66447de751cf3210d3452f01"
+  },
+  "name": "Tenant Improvements"
+},
+{
+  "_id": {
+    "$oid": "66447de751cf3210d3452f00"
+  },
+  "name": "Surrender"
+},
+{
+  "_id": {
+    "$oid": "6673bef74b464d4368fbbcf7"
+  },
+  "name": "AROE"
+},
+{
+  "_id": {
+    "$oid": "6673befc4b464d4368fbbcf8"
+  },
+  "name": "Contractual Obligation"
+},
+{
+  "_id": {
+    "$oid": "6673bf014b464d4368fbbcf9"
+  },
+  "name": "Sales Reporting and Financials"
+},
+{
+  "_id": {
+    "$oid": "6673bf064b464d4368fbbcfa"
+  },
+  "name": "Information Technology"
+},
+{
+  "_id": {
+    "$oid": "6673bf0b4b464d4368fbbcfb"
+  },
+  "name": "Pylon"
+},
+{
+  "_id": {
+    "$oid": "6673bf104b464d4368fbbcfc"
+  },
+  "name": "Radius Restriction"
+},
+{
+  "_id": {
+    "$oid": "6673cd03477270077cde1272"
+  },
+  "name": "Landlord Lien"
+},
+{
+  "_id": {
+    "$oid": "6673cd08477270077cde1273"
+  },
+  "name": "Trade Name"
+},
+{
+  "_id": {
+    "$oid": "6673d0bcd353dc605d4eb7a5"
+  },
+  "name": "Financial Statement"
+},
+{
+  "_id": {
+    "$oid": "667514470a5cb33d86ee3793"
+  },
+  "name": "Contingency"
+},
+{
+  "_id": {
+    "$oid": "6678ff03a9aefb6552287dac"
+  },
+  "name": "Store Operation"
+},
+{
+  "_id": {
+    "$oid": "66fa76bc6bf9d16cddb69e46"
+  },
+  "name": "Downsize"
+},
+{
+  "_id": {
+    "$oid": "66fa76c76bf9d16cddb69e47"
+  },
+  "name": "Purchase"
+},
+{
+  "_id": {
+    "$oid": "66fa76d16bf9d16cddb69e48"
+  },
+  "name": "Relocation"
+},
+{
+  "_id": {
+    "$oid": "66fa76dc6bf9d16cddb69e49"
+  },
+  "name": "Utilities"
+},
+{
+  "_id": {
+    "$oid": "6715ffe758920c129b4a7277"
+  },
+  "name": "Guarantor"
+},
+{
+  "_id": {
+    "$oid": "671737d658920c129b4a72b6"
+  },
+  "name": "Tenant Responsibilities"
+},
+{
+  "_id": {
+    "$oid": "671737f358920c129b4a72b7"
+  },
+  "name": "Landlord Responsibilities"
+},
+{
+  "_id": {
+    "$oid": "682ae32ff098740272f11c70"
+  },
+  "name": "Percentage Rent"
+},
+{
+  "_id": {
+    "$oid": "68c01cf286f264baffa51891"
+  },
+  "name": "Environmental/Hazardous Materials"
+},
+{
+  "_id": {
+    "$oid": "68c115a10a9fcc90b52cf86b"
+  },
+  "name": "HVAC"
+},
+{
+  "_id": {
+    "$oid": "68c115d40a9fcc90b52cf86c"
+  },
+  "name": "Roof"
+},
+{
+  "_id": {
+    "$oid": "68c116460a9fcc90b52cf86d"
+  },
+  "name": "Sustainability"
+},
+{
+  "_id": {
+    "$oid": "68c116980a9fcc90b52cf86e"
+  },
+  "name": "Capex"
+},
+{
+  "_id": {
+    "$oid": "692fd7df6fa7a14c781792aa"
+  },
+  "name": "Tenant inducements"
+},
+{
+  "_id": {
+    "$oid": "692fd81f6fa7a14c781792ab"
+  },
+  "name": "Restricted Use"
+},
+{
+  "_id": {
+    "$oid": "692fd8866fa7a14c781792ac"
+  },
+  "name": "Capital Improvement Responsibilities"
+}]

@@ -1,0 +1,31 @@
+text,label
+"The monthly rent shall be $1,500, due on the first day of each month.",rent_payment
+"Late payment of rent will incur a fee of 5% of the monthly rent amount.",rent_payment
+"Rent may be paid by check, money order, or electronic transfer.",rent_payment
+"A security deposit of $3,000 is required prior to move-in.",security_deposit
+"The security deposit shall be returned within 30 days of lease termination.",security_deposit
+"Landlord may deduct from security deposit for unpaid rent or damages.",security_deposit
+"Tenant is responsible for routine maintenance and minor repairs under $100.",maintenance
+"Landlord shall maintain all major systems including HVAC and plumbing.",maintenance
+"Tenant must report any maintenance issues within 48 hours of discovery.",maintenance
+"Either party may terminate this lease with 60 days written notice.",termination
+"Early termination requires payment of two months rent as penalty.",termination
+"This lease shall terminate automatically at the end of the term.",termination
+"Tenant is responsible for all utilities including gas and electric.",utilities
+"Landlord pays for water and trash removal.",utilities
+"All utility accounts must be transferred to tenant's name before move-in.",utilities
+"No pets are allowed on the premises without prior written consent.",pets
+"A non-refundable pet deposit of $500 is required for each approved pet.",pets
+"Service animals are permitted as required by law.",pets
+"Tenant may not sublet the premises without prior written consent.",subletting
+"Short-term rentals such as Airbnb are expressly prohibited.",subletting
+"Subletting requires landlord approval and may incur a transfer fee.",subletting
+"Tenant must maintain renter's insurance with minimum coverage of $100,000.",insurance
+"Proof of insurance must be provided to landlord before move-in.",insurance
+"Landlord's insurance does not cover tenant's personal property.",insurance
+"Failure to pay rent within 10 days constitutes default.",default
+"Upon default, landlord may pursue all legal remedies including eviction.",default
+"Repeated violations of lease terms constitute grounds for termination.",default
+"This lease shall be governed by the laws of the State of California.",other
+"The premises shall be used exclusively for residential purposes.",other
+"Smoking is prohibited in all indoor areas of the premises.",other

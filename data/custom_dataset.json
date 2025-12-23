@@ -1,0 +1,100 @@
+{
+  "metadata": {
+    "description": "Custom training data for lease clause classification",
+    "version": "1.0",
+    "categories": [
+      "rent_payment",
+      "security_deposit",
+      "maintenance",
+      "termination",
+      "utilities",
+      "pets",
+      "subletting",
+      "insurance",
+      "default",
+      "other"
+    ]
+  },
+  "training_data": [
+    {
+      "text": "The monthly rent shall be $1,500, due on the first day of each month.",
+      "label": "rent_payment"
+    },
+    {
+      "text": "Late payment of rent will incur a fee of 5% of the monthly rent amount.",
+      "label": "rent_payment"
+    },
+    {
+      "text": "A security deposit of $3,000 is required prior to move-in.",
+      "label": "security_deposit"
+    },
+    {
+      "text": "The security deposit shall be returned within 30 days of lease termination.",
+      "label": "security_deposit"
+    },
+    {
+      "text": "Tenant is responsible for routine maintenance and minor repairs under $100.",
+      "label": "maintenance"
+    },
+    {
+      "text": "Landlord shall maintain all major systems including HVAC, plumbing, and electrical.",
+      "label": "maintenance"
+    },
+    {
+      "text": "Either party may terminate this lease with 60 days written notice.",
+      "label": "termination"
+    },
+    {
+      "text": "Early termination requires payment of two months rent as penalty.",
+      "label": "termination"
+    },
+    {
+      "text": "Tenant is responsible for all utilities including gas, electric, and water.",
+      "label": "utilities"
+    },
+    {
+      "text": "Landlord pays for water and trash removal; tenant pays electric and gas.",
+      "label": "utilities"
+    },
+    {
+      "text": "No pets are allowed on the premises without prior written consent.",
+      "label": "pets"
+    },
+    {
+      "text": "A non-refundable pet deposit of $500 is required for each approved pet.",
+      "label": "pets"
+    },
+    {
+      "text": "Tenant may not sublet the premises without prior written consent from landlord.",
+      "label": "subletting"
+    },
+    {
+      "text": "Short-term rentals such as Airbnb are expressly prohibited.",
+      "label": "subletting"
+    },
+    {
+      "text": "Tenant must maintain renter's insurance with minimum coverage of $100,000.",
+      "label": "insurance"
+    },
+    {
+      "text": "Proof of insurance must be provided to landlord before move-in.",
+      "label": "insurance"
+    },
+    {
+      "text": "Failure to pay rent within 10 days constitutes default under this lease.",
+      "label": "default"
+    },
+    {
+      "text": "Upon default, landlord may pursue all legal remedies including eviction.",
+      "label": "default"
+    },
+    {
+      "text": "This lease shall be governed by the laws of the State of California.",
+      "label": "other"
+    },
+    {
+      "text": "The premises shall be used exclusively for residential purposes.",
+      "label": "other"
+    }
+  ]
+}

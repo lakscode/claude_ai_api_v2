@@ -14,6 +14,7 @@ from pathlib import Path
 from datetime import datetime, timezone
 
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 from lease_classifier import LeaseClauseClassifier, PDFReader, DataLoader
 
@@ -22,6 +23,7 @@ DEFAULT_CONFIG_FILE = "config.ini"
 
 # Global variables
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 config = None
 classifier = None
 success_logger = None
@@ -1258,6 +1260,364 @@ def list_models():
         "default_model": config["openai"]["gpt_model"],
         "available_models": list(models.keys())
     })
+
+
+@app.route('/data', methods=['GET'])
+def get_all_data():
+    """
+    Get all stored classification data from MongoDB.
+
+    Query Parameters:
+        - limit: Maximum number of records to return (default: 100, max: 1000)
+        - skip: Number of records to skip for pagination (default: 0)
+        - sort: Sort order - 'asc' or 'desc' by created_at (default: desc)
+
+    Response:
+        JSON with list of all classification results and pagination info.
+    """
+    try:
+        # Get MongoDB settings
+        mongo_config = config.get("mongodb", {})
+        mongo_uri = os.environ.get('MONGODB_URI') or mongo_config.get("uri", "")
+        mongo_db = mongo_config.get("database", "")
+        mongo_collection = mongo_config.get("collection", "cube_outputs")
+
+        if not mongo_uri or not mongo_db:
+            log_error("MongoDB not configured", endpoint="/data")
+            return jsonify({"error": "MongoDB not configured"}), 500
+
+        # Get pagination parameters
+        limit = min(int(request.args.get('limit', 100)), 1000)
+        skip = int(request.args.get('skip', 0))
+        sort_order = request.args.get('sort', 'desc')
+        sort_direction = -1 if sort_order == 'desc' else 1
+
+        from pymongo import MongoClient
+        from bson import ObjectId
+
+        client = MongoClient(mongo_uri)
+        db = client[mongo_db]
+        collection = db[mongo_collection]
+
+        # Get total count
+        total_count = collection.count_documents({})
+
+        # Fetch data with pagination
+        cursor = collection.find({}).sort("created_at", sort_direction).skip(skip).limit(limit)
+
+        results = []
+        for doc in cursor:
+            # Convert ObjectId to string for JSON serialization
+            if '_id' in doc:
+                doc['_id'] = str(doc['_id'])
+            # Convert datetime to ISO format string
+            if 'created_at' in doc:
+                doc['created_at'] = doc['created_at'].isoformat() if hasattr(doc['created_at'], 'isoformat') else str(doc['created_at'])
+            results.append(doc)
+
+        client.close()
+
+        log_success("Data retrieved from MongoDB", endpoint="/data", count=len(results), total=total_count)
+
+        return jsonify({
+            "total": total_count,
+            "limit": limit,
+            "skip": skip,
+            "count": len(results),
+            "data": results
+        }), 200
+
+    except ImportError as e:
+        log_error("pymongo library not installed", endpoint="/data", error=str(e))
+        return jsonify({"error": "pymongo library not installed"}), 500
+    except Exception as e:
+        log_error("Failed to retrieve data", endpoint="/data", error=str(e))
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route('/data/<doc_id>', methods=['GET'])
+def get_data_by_id(doc_id):
+    """
+    Get a specific classification result by document ID.
+
+    Path Parameters:
+        - doc_id: MongoDB document ID
+
+    Response:
+        JSON with the classification result.
+    """
+    try:
+        # Get MongoDB settings
+        mongo_config = config.get("mongodb", {})
+        mongo_uri = os.environ.get('MONGODB_URI') or mongo_config.get("uri", "")
+        mongo_db = mongo_config.get("database", "")
+        mongo_collection = mongo_config.get("collection", "cube_outputs")
+
+        if not mongo_uri or not mongo_db:
+            log_error("MongoDB not configured", endpoint=f"/data/{doc_id}")
+            return jsonify({"error": "MongoDB not configured"}), 500
+
+        from pymongo import MongoClient
+        from bson import ObjectId
+
+        client = MongoClient(mongo_uri)
+        db = client[mongo_db]
+        collection = db[mongo_collection]
+
+        # Try to find by ObjectId
+        try:
+            doc = collection.find_one({"_id": ObjectId(doc_id)})
+        except Exception:
+            # If ObjectId conversion fails, try string match
+            doc = collection.find_one({"_id": doc_id})
+
+        client.close()
+
+        if not doc:
+            log_error("Document not found", endpoint=f"/data/{doc_id}", doc_id=doc_id)
+            return jsonify({"error": "Document not found"}), 404
+
+        # Convert ObjectId to string
+        if '_id' in doc:
+            doc['_id'] = str(doc['_id'])
+        if 'created_at' in doc:
+            doc['created_at'] = doc['created_at'].isoformat() if hasattr(doc['created_at'], 'isoformat') else str(doc['created_at'])
+
+        log_success("Document retrieved", endpoint=f"/data/{doc_id}", doc_id=doc_id)
+
+        return jsonify(doc), 200
+
+    except ImportError as e:
+        log_error("pymongo library not installed", endpoint=f"/data/{doc_id}", error=str(e))
+        return jsonify({"error": "pymongo library not installed"}), 500
+    except Exception as e:
+        log_error("Failed to retrieve document", endpoint=f"/data/{doc_id}", error=str(e))
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route('/data/search', methods=['GET'])
+def search_data():
+    """
+    Search classification data by PDF filename or field values.
+
+    Query Parameters:
+        - filename: Search by PDF filename (partial match)
+        - field_name: Search by field name
+        - field_value: Search by field value (use with field_name)
+        - limit: Maximum number of records (default: 100)
+
+    Response:
+        JSON with matching classification results.
+    """
+    try:
+        # Get MongoDB settings
+        mongo_config = config.get("mongodb", {})
+        mongo_uri = os.environ.get('MONGODB_URI') or mongo_config.get("uri", "")
+        mongo_db = mongo_config.get("database", "")
+        mongo_collection = mongo_config.get("collection", "cube_outputs")
+
+        if not mongo_uri or not mongo_db:
+            log_error("MongoDB not configured", endpoint="/data/search")
+            return jsonify({"error": "MongoDB not configured"}), 500
+
+        # Get search parameters
+        filename = request.args.get('filename', '')
+        field_name = request.args.get('field_name', '')
+        field_value = request.args.get('field_value', '')
+        limit = min(int(request.args.get('limit', 100)), 1000)
+
+        from pymongo import MongoClient
+
+        client = MongoClient(mongo_uri)
+        db = client[mongo_db]
+        collection = db[mongo_collection]
+
+        # Build query
+        query = {}
+        if filename:
+            query['pdf_file'] = {'$regex': filename, '$options': 'i'}
+        if field_name:
+            query['fields.field_name'] = {'$regex': field_name, '$options': 'i'}
+        if field_value:
+            query['fields.values'] = {'$regex': field_value, '$options': 'i'}
+
+        if not query:
+            client.close()
+            return jsonify({"error": "At least one search parameter required (filename, field_name, or field_value)"}), 400
+
+        # Fetch matching documents
+        cursor = collection.find(query).sort("created_at", -1).limit(limit)
+
+        results = []
+        for doc in cursor:
+            if '_id' in doc:
+                doc['_id'] = str(doc['_id'])
+            if 'created_at' in doc:
+                doc['created_at'] = doc['created_at'].isoformat() if hasattr(doc['created_at'], 'isoformat') else str(doc['created_at'])
+            results.append(doc)
+
+        client.close()
+
+        log_success("Search completed", endpoint="/data/search", query=str(query), count=len(results))
+
+        return jsonify({
+            "count": len(results),
+            "query": {
+                "filename": filename or None,
+                "field_name": field_name or None,
+                "field_value": field_value or None
+            },
+            "data": results
+        }), 200
+
+    except ImportError as e:
+        log_error("pymongo library not installed", endpoint="/data/search", error=str(e))
+        return jsonify({"error": "pymongo library not installed"}), 500
+    except Exception as e:
+        log_error("Search failed", endpoint="/data/search", error=str(e))
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route('/data/<doc_id>', methods=['DELETE'])
+def delete_data(doc_id):
+    """
+    Delete a specific classification result by document ID.
+
+    Path Parameters:
+        - doc_id: MongoDB document ID
+
+    Response:
+        JSON with deletion status.
+    """
+    try:
+        # Get MongoDB settings
+        mongo_config = config.get("mongodb", {})
+        mongo_uri = os.environ.get('MONGODB_URI') or mongo_config.get("uri", "")
+        mongo_db = mongo_config.get("database", "")
+        mongo_collection = mongo_config.get("collection", "cube_outputs")
+
+        if not mongo_uri or not mongo_db:
+            log_error("MongoDB not configured", endpoint=f"/data/{doc_id}")
+            return jsonify({"error": "MongoDB not configured"}), 500
+
+        from pymongo import MongoClient
+        from bson import ObjectId
+
+        client = MongoClient(mongo_uri)
+        db = client[mongo_db]
+        collection = db[mongo_collection]
+
+        # Try to delete by ObjectId
+        try:
+            result = collection.delete_one({"_id": ObjectId(doc_id)})
+        except Exception:
+            # If ObjectId conversion fails, try string match
+            result = collection.delete_one({"_id": doc_id})
+
+        client.close()
+
+        if result.deleted_count == 0:
+            log_error("Document not found for deletion", endpoint=f"/data/{doc_id}", doc_id=doc_id)
+            return jsonify({"error": "Document not found"}), 404
+
+        log_success("Document deleted", endpoint=f"/data/{doc_id}", doc_id=doc_id)
+
+        return jsonify({
+            "message": "Document deleted successfully",
+            "doc_id": doc_id
+        }), 200
+
+    except ImportError as e:
+        log_error("pymongo library not installed", endpoint=f"/data/{doc_id}", error=str(e))
+        return jsonify({"error": "pymongo library not installed"}), 500
+    except Exception as e:
+        log_error("Failed to delete document", endpoint=f"/data/{doc_id}", error=str(e))
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route('/data/stats', methods=['GET'])
+def get_data_stats():
+    """
+    Get statistics about stored classification data.
+
+    Response:
+        JSON with database statistics.
+    """
+    try:
+        # Get MongoDB settings
+        mongo_config = config.get("mongodb", {})
+        mongo_uri = os.environ.get('MONGODB_URI') or mongo_config.get("uri", "")
+        mongo_db = mongo_config.get("database", "")
+        mongo_collection = mongo_config.get("collection", "cube_outputs")
+
+        if not mongo_uri or not mongo_db:
+            log_error("MongoDB not configured", endpoint="/data/stats")
+            return jsonify({"error": "MongoDB not configured"}), 500
+
+        from pymongo import MongoClient
+
+        client = MongoClient(mongo_uri)
+        db = client[mongo_db]
+        collection = db[mongo_collection]
+
+        # Get statistics
+        total_documents = collection.count_documents({})
+
+        # Aggregate statistics
+        pipeline = [
+            {
+                "$group": {
+                    "_id": None,
+                    "total_clauses": {"$sum": "$total_clauses"},
+                    "total_fields": {"$sum": "$total_fields"},
+                    "total_api_calls": {"$sum": "$openai_api_calls"},
+                    "avg_clauses": {"$avg": "$total_clauses"},
+                    "avg_fields": {"$avg": "$total_fields"}
+                }
+            }
+        ]
+
+        stats_result = list(collection.aggregate(pipeline))
+
+        # Get unique PDF files
+        unique_pdfs = len(collection.distinct("pdf_file"))
+
+        # Get date range
+        oldest = collection.find_one({}, sort=[("created_at", 1)])
+        newest = collection.find_one({}, sort=[("created_at", -1)])
+
+        client.close()
+
+        stats = {
+            "total_documents": total_documents,
+            "unique_pdfs": unique_pdfs,
+            "database": mongo_db,
+            "collection": mongo_collection
+        }
+
+        if stats_result:
+            agg = stats_result[0]
+            stats["total_clauses_processed"] = agg.get("total_clauses", 0)
+            stats["total_fields_extracted"] = agg.get("total_fields", 0)
+            stats["total_api_calls"] = agg.get("total_api_calls", 0)
+            stats["avg_clauses_per_doc"] = round(agg.get("avg_clauses", 0), 2)
+            stats["avg_fields_per_doc"] = round(agg.get("avg_fields", 0), 2)
+
+        if oldest and 'created_at' in oldest:
+            stats["oldest_record"] = oldest['created_at'].isoformat() if hasattr(oldest['created_at'], 'isoformat') else str(oldest['created_at'])
+        if newest and 'created_at' in newest:
+            stats["newest_record"] = newest['created_at'].isoformat() if hasattr(newest['created_at'], 'isoformat') else str(newest['created_at'])
+
+        log_success("Stats retrieved", endpoint="/data/stats", total=total_documents)
+
+        return jsonify(stats), 200
+
+    except ImportError as e:
+        log_error("pymongo library not installed", endpoint="/data/stats", error=str(e))
+        return jsonify({"error": "pymongo library not installed"}), 500
+    except Exception as e:
+        log_error("Failed to retrieve stats", endpoint="/data/stats", error=str(e))
+        return jsonify({"error": str(e)}), 500
 
 
 def init_app():

@@ -13,6 +13,7 @@ from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
 from lease_classifier import LeaseClauseClassifier, PDFReader, DataLoader
+from output_generator import generate_outputs
 
 # Default config file path
 DEFAULT_CONFIG_FILE = "config.ini"
@@ -825,8 +826,8 @@ def main():
                         help='Path to folder containing PDF files (required)')
     parser.add_argument('--config', type=str, default='config.ini',
                         help='Path to config file (default: config.ini)')
-    parser.add_argument('--output', type=str, default=None,
-                        help='Output folder for JSON files (default: prints to console)')
+    parser.add_argument('--output', type=str, default='output_files',
+                        help='Output folder for result files (default: output_files)')
     parser.add_argument('--no-fields', action='store_true',
                         help='Skip field extraction with OpenAI')
     parser.add_argument('--gpt-model', type=str, default=None,
@@ -1047,13 +1048,25 @@ def main():
     log_success("Batch processing complete", folder=args.input_folder,
                total=len(pdf_files), successful=successful, failed=failed)
 
-    # Save output.json to output folder
+    # Save outputs to output folder
     if output_folder and all_results:
+        # Save JSON output
         output_file = output_folder / "output.json"
         with open(output_file, 'w', encoding='utf-8') as f:
             json.dump(all_results, f, indent=2, ensure_ascii=False)
-        print(f"\nResults saved to: {output_file}")
+        print(f"\nJSON results saved to: {output_file}")
         log_success("Results saved to output.json", output_file=str(output_file), total_pdfs=len(all_results))
+
+        # Generate Excel and PDF outputs
+        print("\nGenerating Excel and PDF outputs...")
+        generated_files = generate_outputs(all_results, str(output_folder), "lease_classification")
+
+        if generated_files.get("excel"):
+            log_success("Excel output generated", file=generated_files["excel"])
+        if generated_files.get("pdf"):
+            log_success("PDF output generated", file=generated_files["pdf"])
+
+        print(f"\nAll outputs saved to: {output_folder}")
     elif all_results:
         # If no output folder, print all results to console
         print("\n--- Results ---")

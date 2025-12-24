@@ -84,22 +84,47 @@ def generate_excel_output(results, output_folder, filename_prefix="lease_classif
         clause_row = 2
         for result in results:
             pdf_file = result.get("pdf_file", "")
-            for clause in result.get("clauses", []):
-                ws_clauses.cell(row=clause_row, column=1, value=pdf_file).border = border
-                ws_clauses.cell(row=clause_row, column=2, value=clause.get("clause_index", "")).border = border
-                ws_clauses.cell(row=clause_row, column=3, value=clause.get("type", "")).border = border
-                ws_clauses.cell(row=clause_row, column=4, value=clause.get("type_id", "")).border = border
-                ws_clauses.cell(row=clause_row, column=5, value=clause.get("confidence", 0)).border = border
+            for clause_group in result.get("clauses", []):
+                # Handle new grouped structure: each clause_group has type, type_id, and values array
+                clause_type = clause_group.get("type", "")
+                clause_type_id = clause_group.get("type_id", "")
 
-                # Truncate clause text if too long for Excel cell
-                clause_text = clause.get("text", "")
-                if len(clause_text) > 32000:
-                    clause_text = clause_text[:32000] + "..."
-                cell = ws_clauses.cell(row=clause_row, column=6, value=clause_text)
-                cell.border = border
-                cell.alignment = Alignment(wrap_text=True)
+                # Check if using new grouped format (has 'values' array) or old format
+                if "values" in clause_group:
+                    # New grouped format
+                    for clause in clause_group.get("values", []):
+                        ws_clauses.cell(row=clause_row, column=1, value=pdf_file).border = border
+                        ws_clauses.cell(row=clause_row, column=2, value=clause.get("clause_index", "")).border = border
+                        ws_clauses.cell(row=clause_row, column=3, value=clause_type).border = border
+                        ws_clauses.cell(row=clause_row, column=4, value=clause_type_id).border = border
+                        ws_clauses.cell(row=clause_row, column=5, value=clause.get("confidence", 0)).border = border
 
-                clause_row += 1
+                        # Truncate clause text if too long for Excel cell
+                        clause_text = clause.get("text", "")
+                        if len(clause_text) > 32000:
+                            clause_text = clause_text[:32000] + "..."
+                        cell = ws_clauses.cell(row=clause_row, column=6, value=clause_text)
+                        cell.border = border
+                        cell.alignment = Alignment(wrap_text=True)
+
+                        clause_row += 1
+                else:
+                    # Old flat format (backward compatibility)
+                    ws_clauses.cell(row=clause_row, column=1, value=pdf_file).border = border
+                    ws_clauses.cell(row=clause_row, column=2, value=clause_group.get("clause_index", "")).border = border
+                    ws_clauses.cell(row=clause_row, column=3, value=clause_group.get("type", "")).border = border
+                    ws_clauses.cell(row=clause_row, column=4, value=clause_group.get("type_id", "")).border = border
+                    ws_clauses.cell(row=clause_row, column=5, value=clause_group.get("confidence", 0)).border = border
+
+                    # Truncate clause text if too long for Excel cell
+                    clause_text = clause_group.get("text", "")
+                    if len(clause_text) > 32000:
+                        clause_text = clause_text[:32000] + "..."
+                    cell = ws_clauses.cell(row=clause_row, column=6, value=clause_text)
+                    cell.border = border
+                    cell.alignment = Alignment(wrap_text=True)
+
+                    clause_row += 1
 
         # Adjust column widths for clauses
         ws_clauses.column_dimensions['A'].width = 30
@@ -333,10 +358,31 @@ def generate_pdf_output(results, output_folder, filename_prefix="lease_classific
 
         for result in results:
             pdf_name = result.get("pdf_file", "Unknown")
-            clauses = result.get("clauses", [])
+            clause_groups = result.get("clauses", [])
 
-            if clauses:
-                elements.append(Paragraph(f"<b>{pdf_name}</b> ({len(clauses)} clauses)", normal_style))
+            if clause_groups:
+                # Calculate total clauses from grouped structure or flat structure
+                total_clauses = 0
+                flat_clauses = []
+
+                for clause_group in clause_groups:
+                    if "values" in clause_group:
+                        # New grouped format - flatten for display
+                        clause_type = clause_group.get("type", "")
+                        for clause in clause_group.get("values", []):
+                            flat_clauses.append({
+                                "clause_index": clause.get("clause_index", ""),
+                                "type": clause_type,
+                                "confidence": clause.get("confidence", 0),
+                                "text": clause.get("text", "")
+                            })
+                            total_clauses += 1
+                    else:
+                        # Old flat format
+                        flat_clauses.append(clause_group)
+                        total_clauses += 1
+
+                elements.append(Paragraph(f"<b>{pdf_name}</b> ({total_clauses} clauses)", normal_style))
                 elements.append(Spacer(1, 5))
 
                 # Header row with plain text
@@ -346,7 +392,7 @@ def generate_pdf_output(results, output_folder, filename_prefix="lease_classific
                     Paragraph("<b>Confidence</b>", cell_style),
                     Paragraph("<b>Text Preview</b>", cell_style)
                 ]]
-                for clause in clauses[:50]:  # Limit to first 50 clauses per PDF
+                for clause in flat_clauses[:50]:  # Limit to first 50 clauses per PDF
                     clause_text = clause.get("text", "")
                     # Truncate text for PDF but allow more text with wrapping
                     if len(clause_text) > 300:
@@ -380,8 +426,8 @@ def generate_pdf_output(results, output_folder, filename_prefix="lease_classific
                 ]))
                 elements.append(clause_table)
 
-                if len(clauses) > 50:
-                    elements.append(Paragraph(f"<i>... and {len(clauses) - 50} more clauses</i>", small_style))
+                if total_clauses > 50:
+                    elements.append(Paragraph(f"<i>... and {total_clauses - 50} more clauses</i>", small_style))
 
                 elements.append(Spacer(1, 15))
 

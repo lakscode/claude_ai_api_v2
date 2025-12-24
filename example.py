@@ -719,8 +719,8 @@ def process_single_pdf(pdf_path, classifier, name_to_id, fields, openai_client,
             log_error("Failed to extract clauses from PDF", pdf=str(pdf_path), error=str(e))
             return None
 
-        # Classify each clause and build results
-        clauses_results = []
+        # Classify each clause and group by predicted type
+        clauses_dict = {}  # Group clauses by type
         clauses_for_extraction = []
 
         log_success("Classifying clauses", pdf=str(pdf_path.name), total_clauses=len(test_clauses))
@@ -733,14 +733,20 @@ def process_single_pdf(pdf_path, classifier, name_to_id, fields, openai_client,
                 # Get mapping ID for the predicted type
                 type_id = name_to_id.get(prediction, None)
 
-                clause_result = {
+                # Group clauses by predicted type (similar to fields grouping)
+                if prediction not in clauses_dict:
+                    clauses_dict[prediction] = {
+                        "type": prediction,
+                        "type_id": type_id,
+                        "values": []
+                    }
+
+                # Add clause to the values array for this type
+                clauses_dict[prediction]["values"].append({
                     "clause_index": idx,
                     "text": clause,
-                    "type": prediction,
-                    "type_id": type_id,
                     "confidence": round(confidence, 4)
-                }
-                clauses_results.append(clause_result)
+                })
 
                 # Collect clauses for batch field extraction
                 if extract_fields and fields and openai_client:
@@ -753,6 +759,9 @@ def process_single_pdf(pdf_path, classifier, name_to_id, fields, openai_client,
             except Exception as e:
                 log_error("Clause classification error", clause_index=idx, error=str(e))
                 continue
+
+        # Convert clauses dict to list
+        clauses_results = list(clauses_dict.values())
 
         # Extract fields using OpenAI in batches (reduces API calls)
         fields_results = []
@@ -790,13 +799,17 @@ def process_single_pdf(pdf_path, classifier, name_to_id, fields, openai_client,
             except Exception as e:
                 log_error("Batch field extraction error", pdf=str(pdf_path.name), error=str(e))
 
+        # Calculate total individual clauses processed
+        total_individual_clauses = sum(len(c["values"]) for c in clauses_results)
+
         # Build output JSON
         output = {
             "pdf_file": str(pdf_path.name),
             "storage_type": "local",
             "storage_name": storage_name,
             "storage_location": storage_location,
-            "total_clauses": len(clauses_results),
+            "total_clauses": total_individual_clauses,
+            "total_clause_types": len(clauses_results),
             "total_fields": len(fields_results),
             "openai_api_calls": api_call_counter['count'],
             "field_extraction_enabled": extract_fields,
@@ -812,7 +825,8 @@ def process_single_pdf(pdf_path, classifier, name_to_id, fields, openai_client,
                 output["_id"] = mongo_id
 
         log_success("PDF processing complete", pdf=str(pdf_path.name),
-                   clauses=len(clauses_results), fields=len(fields_results))
+                   clause_types=len(clauses_results), total_clauses=total_individual_clauses,
+                   fields=len(fields_results))
         return output
 
     except Exception as e:

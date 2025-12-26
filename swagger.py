@@ -102,6 +102,10 @@ API calls are not rate-limited by default, but OpenAI API calls are tracked.
         {
             "name": "Export",
             "description": "Data export endpoints"
+        },
+        {
+            "name": "Lease Uploads",
+            "description": "Lease upload and batch processing endpoints"
         }
     ],
     "paths": {
@@ -1781,6 +1785,418 @@ API calls are not rate-limited by default, but OpenAI API calls are tracked.
                     }
                 }
             }
+        },
+
+        # Lease Upload endpoints
+        "/leases/upload": {
+            "post": {
+                "tags": ["Lease Uploads"],
+                "summary": "Upload a lease PDF",
+                "description": "Upload a single lease PDF to storage and save metadata in the lease_uploads collection with pending status",
+                "operationId": "uploadLease",
+                "requestBody": {
+                    "required": True,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "required": ["pdf"],
+                                "properties": {
+                                    "pdf": {
+                                        "type": "string",
+                                        "format": "binary",
+                                        "description": "PDF file to upload"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Lease uploaded successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LeaseUploadResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request (no file or invalid file type)",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Upload failed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/leases/upload/batch": {
+            "post": {
+                "tags": ["Lease Uploads"],
+                "summary": "Upload multiple lease PDFs",
+                "description": "Upload multiple lease PDFs at once. Each file is saved with pending status.",
+                "operationId": "uploadLeasesBatch",
+                "requestBody": {
+                    "required": True,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "required": ["pdf"],
+                                "properties": {
+                                    "pdf": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        },
+                                        "description": "Multiple PDF files to upload"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Batch upload completed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LeaseBatchUploadResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "No files provided",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/leases": {
+            "get": {
+                "tags": ["Lease Uploads"],
+                "summary": "Get all uploaded leases",
+                "description": "Get all uploaded leases with optional filtering by status and pagination",
+                "operationId": "getLeases",
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Filter by status",
+                        "schema": {
+                            "type": "string",
+                            "enum": ["pending", "processing", "processed", "failed"]
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number",
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Items per page",
+                        "schema": {
+                            "type": "integer",
+                            "default": 20,
+                            "maximum": 100
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of leases",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LeasesListResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Database not configured",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/leases/{lease_id}": {
+            "get": {
+                "tags": ["Lease Uploads"],
+                "summary": "Get lease by ID",
+                "description": "Get a specific uploaded lease by its ID",
+                "operationId": "getLeaseById",
+                "parameters": [
+                    {
+                        "name": "lease_id",
+                        "in": "path",
+                        "required": True,
+                        "description": "Lease ID",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lease details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LeaseDocument"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Lease not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Lease Uploads"],
+                "summary": "Delete a lease",
+                "description": "Delete an uploaded lease record",
+                "operationId": "deleteLease",
+                "parameters": [
+                    {
+                        "name": "lease_id",
+                        "in": "path",
+                        "required": True,
+                        "description": "Lease ID",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lease deleted",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MessageResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Lease not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/leases/process": {
+            "post": {
+                "tags": ["Lease Uploads"],
+                "summary": "Trigger batch processing",
+                "description": "Trigger batch processing of pending leases. Processes 2 files at a time, updates status to 'processing', then 'processed' on completion. Runs in background.",
+                "operationId": "triggerLeaseProcessing",
+                "responses": {
+                    "202": {
+                        "description": "Processing started",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProcessingStartResponse"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Processing already in progress or no pending leases",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProcessingStatusResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Database not configured",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/leases/process/status": {
+            "get": {
+                "tags": ["Lease Uploads"],
+                "summary": "Get processing status",
+                "description": "Get the current processing status and counts by status",
+                "operationId": "getProcessingStatus",
+                "responses": {
+                    "200": {
+                        "description": "Processing status",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProcessingStatusResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Database not configured",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/leases/import-from-folders": {
+            "post": {
+                "tags": ["Lease Uploads"],
+                "summary": "Import PDFs from input folders",
+                "description": "Import PDF files from folders placed inside the input_folders directory. Scans all subfolders recursively and uploads any PDF files found.",
+                "operationId": "importFromFolders",
+                "requestBody": {
+                    "required": False,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ImportFromFoldersRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Import completed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ImportFromFoldersResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Input folders directory not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Database not configured or import failed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/leases/folders": {
+            "get": {
+                "tags": ["Lease Uploads"],
+                "summary": "List input folders",
+                "description": "List all folders inside the input_folders directory with PDF file counts",
+                "operationId": "listInputFolders",
+                "parameters": [
+                    {
+                        "name": "input_path",
+                        "in": "query",
+                        "description": "Custom path to input_folders directory",
+                        "schema": {
+                            "type": "string",
+                            "default": "input_folders"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of folders",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ListFoldersResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Input folders directory not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -2703,6 +3119,333 @@ API calls are not rate-limited by default, but OpenAI API calls are tracked.
                     },
                     "remaining_fields": {
                         "type": "integer"
+                    }
+                }
+            },
+
+            # Lease Upload schemas
+            "ImportFromFoldersRequest": {
+                "type": "object",
+                "description": "Request body for importing PDFs from folders",
+                "properties": {
+                    "input_path": {
+                        "type": "string",
+                        "description": "Custom path to input_folders directory",
+                        "default": "input_folders"
+                    },
+                    "folder_name": {
+                        "type": "string",
+                        "description": "Process only this specific subfolder"
+                    },
+                    "auto_process": {
+                        "type": "boolean",
+                        "description": "Automatically trigger processing after import",
+                        "default": False
+                    }
+                }
+            },
+            "ImportFromFoldersResponse": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "input_path": {
+                        "type": "string"
+                    },
+                    "folders_scanned": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "files_found": {
+                        "type": "integer"
+                    },
+                    "files_imported": {
+                        "type": "integer"
+                    },
+                    "files_skipped": {
+                        "type": "integer"
+                    },
+                    "files_failed": {
+                        "type": "integer"
+                    },
+                    "processing_started": {
+                        "type": "boolean",
+                        "description": "Whether auto-processing was started"
+                    },
+                    "details": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "file": {
+                                    "type": "string"
+                                },
+                                "status": {
+                                    "type": "string",
+                                    "enum": ["imported", "skipped", "failed"]
+                                },
+                                "lease_id": {
+                                    "type": "string"
+                                },
+                                "storage_type": {
+                                    "type": "string"
+                                },
+                                "reason": {
+                                    "type": "string"
+                                },
+                                "existing_id": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "ListFoldersResponse": {
+                "type": "object",
+                "properties": {
+                    "input_path": {
+                        "type": "string"
+                    },
+                    "total_folders": {
+                        "type": "integer"
+                    },
+                    "total_pdf_files": {
+                        "type": "integer"
+                    },
+                    "folders": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "path": {
+                                    "type": "string"
+                                },
+                                "pdf_count": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "LeaseDocument": {
+                "type": "object",
+                "description": "Uploaded lease document with status tracking",
+                "properties": {
+                    "_id": {
+                        "type": "string",
+                        "description": "MongoDB document ID"
+                    },
+                    "original_filename": {
+                        "type": "string",
+                        "description": "Original PDF filename"
+                    },
+                    "storage_name": {
+                        "type": "string",
+                        "description": "Unique filename in storage"
+                    },
+                    "storage_location": {
+                        "type": "string",
+                        "description": "URL or path to stored file"
+                    },
+                    "storage_type": {
+                        "type": "string",
+                        "enum": ["azure", "local"],
+                        "description": "Storage type used"
+                    },
+                    "status": {
+                        "type": "string",
+                        "enum": ["pending", "processing", "processed", "failed"],
+                        "description": "Processing status"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Upload timestamp"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Last update timestamp"
+                    },
+                    "processed_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": True,
+                        "description": "Processing completion timestamp"
+                    },
+                    "result_id": {
+                        "type": "string",
+                        "nullable": True,
+                        "description": "ID of the processed result in cube_outputs collection"
+                    },
+                    "error_message": {
+                        "type": "string",
+                        "nullable": True,
+                        "description": "Error message if processing failed"
+                    }
+                }
+            },
+            "LeaseUploadResponse": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "lease_id": {
+                        "type": "string",
+                        "description": "MongoDB ID of the uploaded lease"
+                    },
+                    "original_filename": {
+                        "type": "string"
+                    },
+                    "storage_name": {
+                        "type": "string"
+                    },
+                    "storage_type": {
+                        "type": "string",
+                        "enum": ["azure", "local"]
+                    },
+                    "status": {
+                        "type": "string",
+                        "enum": ["pending"]
+                    }
+                }
+            },
+            "LeaseBatchUploadResponse": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "total": {
+                        "type": "integer",
+                        "description": "Total files in request"
+                    },
+                    "successful": {
+                        "type": "integer",
+                        "description": "Number of successfully uploaded files"
+                    },
+                    "results": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "filename": {
+                                    "type": "string"
+                                },
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "lease_id": {
+                                    "type": "string",
+                                    "description": "Present if success is true"
+                                },
+                                "storage_name": {
+                                    "type": "string"
+                                },
+                                "storage_type": {
+                                    "type": "string"
+                                },
+                                "status": {
+                                    "type": "string"
+                                },
+                                "error": {
+                                    "type": "string",
+                                    "description": "Present if success is false"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "LeasesListResponse": {
+                "type": "object",
+                "properties": {
+                    "leases": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/LeaseDocument"
+                        }
+                    },
+                    "total": {
+                        "type": "integer",
+                        "description": "Total number of leases matching filter"
+                    },
+                    "page": {
+                        "type": "integer"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "total_pages": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "ProcessingStartResponse": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "Processing started"
+                    },
+                    "pending": {
+                        "type": "integer",
+                        "description": "Number of pending leases to process"
+                    },
+                    "batch_size": {
+                        "type": "integer",
+                        "description": "Number of files processed per batch",
+                        "example": 2
+                    }
+                }
+            },
+            "ProcessingStatusResponse": {
+                "type": "object",
+                "properties": {
+                    "is_processing": {
+                        "type": "boolean",
+                        "description": "Whether batch processing is currently running"
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "Status message (optional)"
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "Status string (optional)"
+                    },
+                    "pending": {
+                        "type": "integer",
+                        "description": "Number of pending leases (optional)"
+                    },
+                    "counts": {
+                        "type": "object",
+                        "properties": {
+                            "pending": {
+                                "type": "integer"
+                            },
+                            "processing": {
+                                "type": "integer"
+                            },
+                            "processed": {
+                                "type": "integer"
+                            },
+                            "failed": {
+                                "type": "integer"
+                            },
+                            "total": {
+                                "type": "integer"
+                            }
+                        }
                     }
                 }
             }

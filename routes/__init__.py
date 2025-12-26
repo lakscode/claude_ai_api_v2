@@ -9,5 +9,6 @@ from .clauses import clauses_bp
 from .fields import fields_bp
 from .auth import auth_bp
 from .users import users_bp
+from .lease_upload import lease_upload_bp
 
-__all__ = ['health_bp', 'classify_bp', 'data_bp', 'clauses_bp', 'fields_bp', 'auth_bp', 'users_bp']
+__all__ = ['health_bp', 'classify_bp', 'data_bp', 'clauses_bp', 'fields_bp', 'auth_bp', 'users_bp', 'lease_upload_bp']

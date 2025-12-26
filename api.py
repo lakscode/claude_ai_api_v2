@@ -23,7 +23,7 @@ from utils import (
     log_success,
     log_error
 )
-from routes import health_bp, classify_bp, data_bp, clauses_bp, fields_bp, auth_bp, users_bp
+from routes import health_bp, classify_bp, data_bp, clauses_bp, fields_bp, auth_bp, users_bp, lease_upload_bp
 from swagger import swagger_ui_blueprint, swagger_spec, SWAGGER_URL
 
 # Default config file path
@@ -506,6 +506,7 @@ def init_app():
         app.register_blueprint(fields_bp)
         app.register_blueprint(auth_bp)
         app.register_blueprint(users_bp)
+        app.register_blueprint(lease_upload_bp)
 
         # Register Swagger UI blueprint
         app.register_blueprint(swagger_ui_blueprint, url_prefix=SWAGGER_URL)

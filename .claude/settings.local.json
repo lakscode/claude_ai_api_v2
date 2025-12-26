@@ -6,7 +6,8 @@
       "Bash(python train_custom.py:*)",
       "Bash(python create_sample_pdf.py:*)",
       "Bash(python example.py:*)",
-      "Bash(python create_test_data.py:*)"
+      "Bash(python create_test_data.py:*)",
+      "Bash(python:*)"
     ]
   }
 }

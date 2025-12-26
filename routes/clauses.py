@@ -250,6 +250,15 @@ def update_clause(doc_id, clause_index):
             log_error("Request body required", endpoint=f"/data/{doc_id}/clauses/{clause_index}", doc_id=doc_id)
             return jsonify({"error": "Request body required"}), 400
 
+        # Handle nested format: if data contains 'values' array, extract from it
+        if "values" in data and isinstance(data["values"], list) and len(data["values"]) > 0:
+            # Extract text and confidence from values[0]
+            values_data = data["values"][0]
+            if "text" in values_data:
+                data["text"] = values_data["text"]
+            if "confidence" in values_data:
+                data["confidence"] = values_data["confidence"]
+
         from pymongo import MongoClient
 
         client = MongoClient(mongo_uri)

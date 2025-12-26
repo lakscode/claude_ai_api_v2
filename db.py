@@ -123,15 +123,25 @@ def update_document_by_id(collection, doc_id, update_data):
             {"_id": ObjectId(doc_id)},
             {"$set": update_data}
         )
-        return result.modified_count > 0 or result.matched_count > 0
-    except Exception:
+        if result.modified_count > 0 or result.matched_count > 0:
+            log_success("Document updated", doc_id=doc_id, modified=result.modified_count, matched=result.matched_count)
+            return True
+        log_error("Document not matched for update", doc_id=doc_id)
+        return False
+    except Exception as e:
+        log_error("ObjectId update failed, trying string ID", doc_id=doc_id, error=str(e))
         try:
             result = collection.update_one(
                 {"_id": doc_id},
                 {"$set": update_data}
             )
-            return result.modified_count > 0 or result.matched_count > 0
-        except Exception:
+            if result.modified_count > 0 or result.matched_count > 0:
+                log_success("Document updated with string ID", doc_id=doc_id, modified=result.modified_count, matched=result.matched_count)
+                return True
+            log_error("Document not matched for update with string ID", doc_id=doc_id)
+            return False
+        except Exception as e2:
+            log_error("Update failed completely", doc_id=doc_id, error=str(e2))
             return False
 
 
